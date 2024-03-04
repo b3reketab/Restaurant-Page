@@ -1,29 +1,42 @@
-import { home } from './homepage.js'
-import { itemOne, itemTwo, itemThree } from './Menu/menu.js'
-import './style.css'
+import { adress, contactInfo } from './components/contact/contact';
+import homepage from './components/home/homepage';
+import { itemOne, itemTwo, itemThree } from './components/menu/menu';
+import './style.css';
 
-const btnDiv = document.createElement('div')
-const tabOne = document.createElement('button')
-const tabTwo = document.createElement('button')
-const div = document.createElement('div')
+const btnDiv = document.createElement('div');
+btnDiv.classList.add('btn-div');
 
-btnDiv.append(tabOne, tabTwo)
+const containerDiv = document.createElement('div');
+containerDiv.classList.add('content');
 
-tabOne.textContent = 'Home'
-tabTwo.textContent = 'Menu'
-div.classList.add('content')
-btnDiv.classList.add('btn-div')
+const homeBtn = document.createElement('button');
+homeBtn.innerText = 'Home';
+homeBtn.addEventListener('click', () => {
+    containerDiv.textContent = '';
+    containerDiv.append(homepage().textNode, homepage().imgDiv, homepage().text );
+    document.body.appendChild(containerDiv);
+});
 
-document.body.appendChild(btnDiv)
-document.body.appendChild(div)
+const menuBtn = document.createElement('button');
+menuBtn.innerText = 'Menu';
+menuBtn.addEventListener('click', () => {
+    containerDiv.textContent = '';
+    containerDiv.append(itemOne.info(), itemTwo.info(), itemThree.info());
+    document.body.appendChild(containerDiv);
+});
 
-div.append(home().header, home().image, home().text)
+const contactBtn = document.createElement('button');
+contactBtn.innerText = 'Contact';
+contactBtn.addEventListener('click', () => {
+    containerDiv.textContent = '';
+    containerDiv.append(adress, contactInfo);
+    document.body.appendChild(containerDiv);
+});
 
-tabOne.addEventListener('click', () => {
-    div.textContent = ''
-    div.append(home().header, home().image, home().text)
-})
-tabTwo.addEventListener('click', () => {
-    div.textContent = ''
-    div.append(itemOne.info(), itemTwo.info(), itemThree.info())
-})
+btnDiv.append(homeBtn, menuBtn, contactBtn);
+document.body.appendChild(btnDiv);
+
+containerDiv.textContent = '';
+containerDiv.append(homepage().textNode, homepage().imgDiv, homepage().text );
+document.body.appendChild(containerDiv)
+
